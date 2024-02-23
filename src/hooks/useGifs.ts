@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../api/api"
-import { getEnvVariables } from '../helpers';
+import { environment } from "../environmets/environment";
 
-const { TOKEN } = getEnvVariables()
+const { TOKEN } = environment
 
 export const useGifs = (categoria:string)=>{
 
@@ -11,7 +11,13 @@ export const useGifs = (categoria:string)=>{
 
     const consultarGifs = async():Promise<void> =>
     {
-       const apiImagenes:any[] = await api.get(`/gifs/search?api_key=${TOKEN}=${ categoria }&limit=10`);
+       const respuesta:any = await api.get(`gifs/search?api_key=${TOKEN}&q=${ categoria }&limit=10`);
+       const apiImagenes = respuesta.data.data.map( img => ({
+            id: img.id,
+            title: img.title,
+            url: img.images.downsized_medium.url
+        }));
+   
        setImagenes(apiImagenes);
        setCargando(false);
     }
