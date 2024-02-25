@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getEnvVariables } from '../helpers';
 import { environment } from '../environmets/environment';
 
 const { API_URL } = environment;

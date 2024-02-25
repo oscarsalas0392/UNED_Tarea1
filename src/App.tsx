@@ -7,21 +7,25 @@ import { Grid } from './components/Grid'
 const App:React.FC =() => {
 
   const [ categories, setCategories ] = useState([ 'One Punch' ]);
- 
-  const onAddCategory = ( newCategory:string ) => {
+  const [ limite, SetLimite ] = useState(12);
+
+  const onAddCategory = ( newCategory:string, limite :number ) => {
     if ( categories.includes(newCategory) ) return;
-    setCategories([ newCategory, ...categories ]);
+    setCategories([ newCategory]);
+    SetLimite(limite);
 }
 
   return (
         <>
-             <h1>GigExpertApp</h1>
-             <AddCategory onAddCategory={(valor)=>onAddCategory(valor)} />
+             <h1 className='titulo'>Tarea 1</h1>
+             <AddCategory onAddCategory={(valor,limite)=>onAddCategory(valor,limite)} />
              { 
                 categories.map( ( category ) => (
                     <Grid 
                         key={ category } 
-                        categoria={ category } />
+                        categoria={ category }
+                        limite={limite}
+                        />
                 ))
               }
 

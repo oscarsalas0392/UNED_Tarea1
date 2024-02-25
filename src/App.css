@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  width: 100%;
 }
 
 .logo {
@@ -39,4 +40,54 @@
 
 .read-the-docs {
   color: #888;
+}
+
+
+#contenedor{ 
+  background-color: #b7bdbf; 
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  width: 100vw;
+  top:0;
+  left: 0;
+  position: fixed;
+  color: #000;
+  z-index: 1;
+  gap:0.3rem;
+
+}
+.cargando{ 
+  position: relative; 
+  color: #FFF;
+  margin-top: 2em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase
+}
+
+.rueda {
+  border: 10px solid rgba(255, 255, 255, .3);
+  border-radius: 50%;
+  border-left-color: transparent;
+  width: 80px;
+  height: 80px;
+  animation: giro 1s linear infinite;
+}
+
+@keyframes giro {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.card-grid{
+
+  display: grid;
+  grid-template-columns:  1fr 1fr 1fr ;
+  align-items: center;
+  gap:0.3rem;
 }

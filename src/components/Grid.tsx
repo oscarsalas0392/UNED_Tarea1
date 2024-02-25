@@ -1,31 +1,50 @@
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2'
 import { useGifs } from '../hooks';
+import { Cargando } from './Cargando';
 import { Item } from './Item';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export type GridProps ={
     categoria:string,
+    limite:number
 }
 
-export const Grid = ({ categoria }) => {
+export const Grid = ({ categoria,limite }) => {
 
-   const {cargando,imagenes } =  useGifs(categoria);
+   const {cargando,imagenes,mensajeError } =  useGifs(categoria,limite);
+ 
+   const showSwal = () => {
+    Swal.fire({
+        title: "Error",
+        text: mensajeError,
+        icon: "error"
+      });
+  }
+
+  useEffect(()=>{
+    console.log(mensajeError)
+    if(mensajeError !== "") showSwal();
+  },[mensajeError])
   
     return (
         <>
-            <h3>{ categoria }</h3>
+            <h3 className='tituloCategoria'>Categoría buscada: { categoria }</h3>
             {
-                cargando && ( <h2>Cargando...</h2> )
+                cargando && <Cargando/>
             }
             
             <div className="card-grid">
                 {
-                    imagenes.map( ( imagen ) => (
+                  categoria &&   imagenes.map( ( imagen ) => (
                         <Item 
                             key={ imagen.id } 
                             { ...imagen }
                         />
                     ))
                 }
+
+                
                 
             </div>
 
